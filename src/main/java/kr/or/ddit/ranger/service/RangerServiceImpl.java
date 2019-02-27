@@ -2,11 +2,16 @@ package kr.or.ddit.ranger.service;
 
 import java.util.List;
 
-import kr.or.ddit.ranger.dao.IRangerDao;
-import kr.or.ddit.ranger.dao.RangerDaoImpl;
+import javax.annotation.Resource;
 
+import org.springframework.stereotype.Service;
+
+import kr.or.ddit.ranger.dao.IRangerDao;
+
+@Service("rangerService")
 public class RangerServiceImpl implements IRangerService{
 	
+	@Resource(name="rangerDao")
 	private IRangerDao rangerDao;
 
 	public RangerServiceImpl() {
@@ -36,6 +41,16 @@ public class RangerServiceImpl implements IRangerService{
 	 */
 	public List<String> getRangers() {
 		return rangerDao.getRangers();
+	}
+
+	@Override
+	public IRangerDao getrangerDao() {
+		return this.rangerDao;
+	}
+
+	@Override
+	public String getRanger(int index) {
+		return rangerDao.getRanger(index);
 	}
 	
 }
