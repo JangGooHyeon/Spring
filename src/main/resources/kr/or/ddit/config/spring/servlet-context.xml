@@ -10,6 +10,7 @@
 	
 	<!-- @Controller 어노테이션을 처리 -->
 	<mvc:annotation-driven/>
+	<!-- spring에서 처리하지 못하는 요청은 was(servlet-container)애게 위임 -->
 	<mvc:default-servlet-handler/>
 	
 	

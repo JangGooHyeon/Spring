@@ -34,11 +34,10 @@ public class RangerController {
 		//request.setAttribute("rangers", rangers)와 동일
 		model.addAttribute("rangers", rangers);
 		
-		return "/ranger/rangerList";
+		return "ranger/rangerList";
 	}
 	
 //	@RequestMapping("/getRanger")
-//	//localhost/ranger/getRanger?listIndex=2 요청시 밑의 메소드에서 요청을 처리
 //	public String getRanger(HttpServletRequest request, Model model) {
 //		
 //		int listIndex = Integer.parseInt(request.getParameter("listIndex"));
@@ -49,7 +48,7 @@ public class RangerController {
 //		return "ranger/ranger";
 //	}
 	
-	
+	//localhost/ranger/getRanger?listIndex=2 요청시 밑의 메소드에서 요청을 처리
 	//vo객체의 파라미터명과 동일한 이름의 필드가 존재하면 파라미터를 해당 필드에 바인딩 시켜준다. 
 	//	--> handler adapter가 vo클래스의 필드를 검색하여 자동으로 바인딩 해준다.
 	@RequestMapping("/getRanger")
