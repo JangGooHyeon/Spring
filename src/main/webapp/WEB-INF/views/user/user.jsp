@@ -30,7 +30,7 @@
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 		<h1 class="page-header">사용자 정보 조회</h1>
 		
-		<form id="frm" class="form-horizontal" role="form" action="${cp }/userModifyForm" method="get">
+		<form id="frm" class="form-horizontal" role="form" action="${cp }/user/userModifyForm" method="get">
 		
 			<div class="form-group">
 				<label for="userNm" class="col-sm-3 control-label">프로필 사진</label>
@@ -88,13 +88,6 @@
 			</div>
 
 			<div class="form-group">
-				<label for="pass" class="col-sm-3 control-label">Password</label>
-				<div class="col-sm-9">
-					<label class="control-label">********</label>
-				</div>
-			</div>
-
-			<div class="form-group">
 				<label for="userNm" class="col-sm-3 control-label">등록일시</label>
 				<div class="col-sm-9">
 					<label class="control-label"><fmt:formatDate value="${userVo.reg_dt }" pattern="yyyy-MM-dd"/></label>
@@ -116,6 +109,17 @@
     <!--  JQuery가 먼저 load된 후 bootstrap이 로드 된다. -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    
+    $(document).ready(function(){
+    	//server side 에서 비교
+        <c:if test="${msg != null }">
+            alert("${msg }");
+        </c:if>
+    });
+    
+    </script>
+    
     
   </body>
 </html>

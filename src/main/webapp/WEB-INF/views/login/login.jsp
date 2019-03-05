@@ -40,7 +40,7 @@
       <form class="form-signin" action="/login" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input name="userId" value="cony" type="text" id="userId" class="form-control" placeholder="Email address" required autofocus>
+        <input name="userId" value="goo8455" type="text" id="userId" class="form-control" placeholder="Email address" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input name="pass" value="qwer1234"	type="password" id="inputPassword" class="form-control" placeholder="Password" required>
         <label>아버지 날 보고 있다면 정-답을 알려줘...</label>
