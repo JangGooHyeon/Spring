@@ -8,7 +8,7 @@
         <li class="active"><a href="${cp }/user/userPagingList">사용자 리스트 페이징</a></li>
       </ul>
       <ul class="nav nav-sidebar">
-        <li class="active"><a href="${cp }/lprodList">제품 그룹리스트 조회</a></li>
+        <li class="active"><a href="${cp }/lprodAllList">제품 그룹리스트 조회</a></li>
         <li class="active"><a href="${cp }/lprodPagingList">제품 그룹리스트 페이징</a></li>
       </ul>
     </div>
