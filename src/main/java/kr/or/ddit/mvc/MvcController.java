@@ -4,13 +4,25 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
+
+import kr.or.ddit.exception.NoFileException;
+import kr.or.ddit.user.model.UserVo;
+import kr.or.ddit.user.validator.UserVoValidator;
 
 @Controller
 public class MvcController {
@@ -57,6 +69,88 @@ public class MvcController {
 		}
 		
 		return "mvc/view";
+	}
+	
+	@RequestMapping("/textView")
+	public String textView(){
+		return "mvc/textView";
+	}
+	
+	
+	//@RequestParam 어노테이션을 적용하지 않더라도 인스턴스명(변수명)과 동일하면 바인딩 처리한다.
+	//파라미터명과 인스턴스명이랑 다를 경우에는 반드시 @RequestParam 어노테이션을 적용해야 바인딩 처리된다.
+	//BindingResult객체는 command객체(vo)에 바인딩 과정에서 발생한 결과를 담는 객체로, 반드시 command객체 메소드 인자 뒤에 위치해다 한다.
+	// 적절한 경우    : UserVo userVo, BindingResult result, Model model
+	// 부적절한 경우 : UserVo userVo, Model model, BindingResult result
+	// *** BindingResult는 validator에서 사용하는 Error객체와 같은 객체로 볼 수 있다.(BindingResult는 Error객체를 상속받는다.)
+	@RequestMapping("/textReq")
+	public String textReq(UserVo userVo, BindingResult result, Model model){
+		logger.debug("userId : {}", userVo.getUserId());
+		logger.debug("pass : {}", userVo.getPass());
+		
+		//검증을 위해 생성했던 UserVoValidator를 통해 검증하기 위해 인자를 설정
+		new UserVoValidator().validate(userVo, result);
+		
+		//.hasErrors는 boolean타입
+		if(result.hasErrors()){
+			logger.debug("hasError!!!");
+			return "mvc/textView";
+		}
+		
+		//pass : 8자리 이상 -> 검증
+//		if(userVo.getPass().length()<8){
+//			model.addAttribute("passwordLengthMsg", "비밀번호는 8자리 이상으로 작성해야 합니다.");
+//		}
+		
+		return "mvc/textView";
+	}
+	
+	@RequestMapping("/textReqJsr303")
+	public String textReqjsr303(@Valid UserVo userVo, BindingResult result){
+		//@Valid어노테이션을 사용하여 맵핑, BindingResult 객체를 통해 검증
+		logger.debug("has errors(jsr303) : {}", result.hasErrors());
+		return "mvc/textView";
+	}
+	
+	@RequestMapping("/textReqValJsr303")
+	public String textReqValJsr303(@Valid UserVo userVo, BindingResult result){
+		logger.debug("has errors(ValJsr303) : {}", result.hasErrors());
+		return "mvc/textView";
+	}
+	
+	@InitBinder
+	public void initBinder(WebDataBinder binder){
+		binder.addValidators(new UserVoValidator());
+	}
+	
+	/**
+	 * Method : throwArithmeticException
+	 * 작성자 : goo84
+	 * 변경이력 :
+	 * @return
+	 * Method 설명 : Arithmetic 예외 강제발생 메소드
+	 */
+	@RequestMapping("/throwArith")
+	public String throwArithmeticException(){
+		
+		if(1==1){
+			throw new ArithmeticException();
+		}
+		return "mvc/textView";
+	}
+	
+	@RequestMapping("/throwNoFileException")
+	public String throwNoFileException() throws NoFileException{
+		Resource resource = new ClassPathResource("kr/or/ddit/config/spring/no-exsist.xml");
+		
+		try {
+			resource.getFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new NoFileException();
+		}
+		
+		return "mvc/textView";
 	}
 	
 }

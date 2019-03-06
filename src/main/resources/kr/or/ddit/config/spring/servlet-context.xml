@@ -23,9 +23,9 @@
 	<!-- @Controller 어노테이션이 적용된 클래스를 스캔 -->
 	<!-- default filter를 true로 지정했기 때문에 exclude filter를 통해 스캔하지 않을 어노테이션을 설정 -->
 	<context:annotation-config/>
-	<context:component-scan base-package="kr.or.ddit" use-default-filters="true">
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+	<context:component-scan base-package="kr.or.ddit" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
 <!-- 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Component"/> -->
 	</context:component-scan>
 	

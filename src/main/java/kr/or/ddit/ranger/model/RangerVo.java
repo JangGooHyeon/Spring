@@ -8,7 +8,7 @@ public class RangerVo {
 	private String userId;
 	private String userNm;
 	
-	int listIndex;
+	private int listIndex;
 	
 	@DateTimeFormat(pattern="MM-dd-yyyy")
 	private Date   birth;

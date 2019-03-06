@@ -6,13 +6,25 @@ import java.util.Date;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class UserVo implements HttpSessionBindingListener {
+	
+	//hibernate validator 사용
+	//@NotBlank -> white space입력 가능 
+	
+	//white space도 거절 -> 문자열이 반드시 입력되어야 함
+	//에러코드 : 어노테이션 명 -> 메세지 소스에 '어노테이션 명.필드명'로 에러메세지를 등록할 수 있다.
+	@NotEmpty
 	private String userId;			//사용자 아이디
+	
+//	@Size(min=8)
 	private String pass;			//사용자 비밀번호
+	
 	private String userNm;			//사용자 이름
 	private String alias; 			//별명
 	private String addr1;			//주소
