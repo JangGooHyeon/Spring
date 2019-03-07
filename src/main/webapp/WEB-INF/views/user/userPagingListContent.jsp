@@ -84,7 +84,7 @@
 					</c:when>
 					<c:otherwise>
 						<li>
-							<a href="${pageContext.servletContext.contextPath }/user/userPagingList?=${lastPage }" aria-label="Previous"><span aria-hidden="true">&raquo;</span></a>
+							<a href="${pageContext.servletContext.contextPath }/user/userPagingList?page=${lastPage }" aria-label="Previous"><span aria-hidden="true">&raquo;</span></a>
 						</li>
 					</c:otherwise>
 				</c:choose>
@@ -93,29 +93,18 @@
 	</div>
 
     <script type="text/javascript">
-    	//문서로딩이 완료된 이후 이벤트 등록
     	$(document).ready(function(){
     		console.log("document ready");
     		
     		$(".userTr").on("click", function(){
     			console.log("userTr click");
-    			//클릭한 userTr 태그의 userId값을 출력
-// 				console.log("data-userid : " + $(this).data("userid"));
     			var userId = $(this).data("userid");
     			
-    			// /user로 이동 방법
-    			// 1. document
-//     			document.location = "/user?userId=" + userId
-    			
-    			// 2. form태그
     			$("#userId").val(userId);
-//     			$("#frm").attr("action","/userAllList");
     			$("#frm").submit();
 				
     		});
-    		
     	});
-    	
     </script>
     
   <form id="frm" action="${cp }/user/user" method="get">

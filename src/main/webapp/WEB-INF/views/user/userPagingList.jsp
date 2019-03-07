@@ -113,7 +113,7 @@
 					</c:when>
 					<c:otherwise>
 						<li>
-							<a href="${pageContext.servletContext.contextPath }/user/userPagingList?=${lastPage }" aria-label="Previous"><span aria-hidden="true">&raquo;</span></a>
+							<a href="${pageContext.servletContext.contextPath }/user/userPagingList?page=${lastPage }" aria-label="Previous"><span aria-hidden="true">&raquo;</span></a>
 						</li>
 					</c:otherwise>
 				</c:choose>

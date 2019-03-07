@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -73,6 +74,55 @@ public class UserController {
 		
 //		return "user/userPagingList";
 		return "userPagingListTiles";
+	}
+	
+	/**
+	 * Method : userPagingListAjaxView
+	 * 작성자 : goo84
+	 * 변경이력 :
+	 * @return
+	 * Method 설명 : 사용자 페이징 리스트 view
+	 */
+	@RequestMapping("userPagingListAjaxView")
+	public String userPagingListAjaxView(){
+		return "userPagingListAjaxTiles";
+	}
+	
+	/**
+	 * Method : userPagingListAjax
+	 * 작성자 : goo84
+	 * 변경이력 :
+	 * @param pageVo
+	 * @param model
+	 * @return
+	 * Method 설명 : 사용자 리스트 페이징 ajax 요청 처리
+	 */
+	@RequestMapping("userPagingListAjax")
+	public String userPagingListAjax(PageVo pageVo, Model model){
+		
+		Map<String, Object> resultMap = userService.selectUserPagingList(pageVo);
+		model.addAllAttributes(resultMap);
+		model.addAttribute("pageSize", pageVo.getPageSize());
+		model.addAttribute("page", pageVo.getPage());
+		
+		//userList, userCnt, page, pageSize
+		//{ userList : [{userId : 'brown', userNm : '브라운'} ... {userId : 'sally', userNm : '샐리'}] }
+		//{ userCnt : "110"}
+		//{ page : "2" }
+		//{ pageSize : "10" }
+		
+		return "jsonView";
+	}
+	
+	@RequestMapping("userPagingListAjaxHtml")
+	public String userPagingListAjaxHtml(PageVo pageVo, Model model){
+		
+		Map<String, Object> resultMap = userService.selectUserPagingList(pageVo);
+		model.addAttribute("pageSize", pageVo.getPageSize());
+		model.addAttribute("page", pageVo.getPage());
+		model.addAllAttributes(resultMap);
+		
+		return "user/userPagingListAjaxHtml";
 	}
 	
 	/**
