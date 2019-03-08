@@ -29,25 +29,12 @@ public class LprodDaoTest extends LogicTestConfig {
 	@Resource(name="prodDao")
 	private IProdDao prodDao;
 	
-	SqlSession sqlSession;
-	
-	@Before
-	public void setup(){
-		SqlSessionFactory sqlSessionFactory = MybatisSqlSessionFactory.getSqlSessionFactory();
-		sqlSession = sqlSessionFactory.openSession();
-	}
-	
-	@After
-	public void testDown(){
-		sqlSession.commit();
-		sqlSession.close();
-	}
 	
 	@Test
 	public void testGetAllProd() {
 		/***Given***/
 		/***When***/
-		List<LprodVo> list = lprodDao.getAllLprod(sqlSession);
+		List<LprodVo> list = lprodDao.getAllLprod();
 		
 		/***Then***/
 		assertNotNull(list);
@@ -58,7 +45,7 @@ public class LprodDaoTest extends LogicTestConfig {
 		/***Given***/
 		PageVo pageVo = new PageVo(1, 5);
 		/***When***/
-		List<LprodVo> list = lprodDao.selectLprodPagingList(sqlSession, pageVo);
+		List<LprodVo> list = lprodDao.selectLprodPagingList(pageVo);
 		
 		/***Then***/
 		assertNotNull(list);
@@ -69,7 +56,7 @@ public class LprodDaoTest extends LogicTestConfig {
 	public void testGetLprodCnt(){
 		/***Given***/
 		/***When***/
-		int cnt = lprodDao.getLprodCnt(sqlSession);
+		int cnt = lprodDao.getLprodCnt();
 		
 		/***Then***/
 		assertEquals(14, cnt);
@@ -80,7 +67,7 @@ public class LprodDaoTest extends LogicTestConfig {
 		/***Given***/
 		String prod_lgu = "P101";
 		/***When***/
-		List<ProdVo> list = prodDao.selectLprod(sqlSession, prod_lgu);
+		List<ProdVo> list = prodDao.selectLprod(prod_lgu);
 
 		/***Then***/
 		assertNotNull(list);

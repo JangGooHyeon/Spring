@@ -16,9 +16,9 @@ public interface IUserDao {
 	 * @return
 	 * Method 설명 : 전체 사용자 조회
 	 */
-	List<UserVo> getAllUser(SqlSession sqlSession);
+	List<UserVo> getAllUser();
 	
-	UserVo selectUser(SqlSession sqlSession, String userId);
+	UserVo selectUser(String userId);
 	
 	/**
 	 * Method : selectUserPagingList
@@ -28,7 +28,7 @@ public interface IUserDao {
 	 * @return
 	 * Method 설명 : 사용자 페이징 리스트 조회
 	 */
-	List<UserVo> selectUserPagingList(SqlSession sqlSession, PageVo pageVo);
+	List<UserVo> selectUserPagingList(PageVo pageVo);
 	
 	/**
 	 * Method : getUserCnt
@@ -37,7 +37,7 @@ public interface IUserDao {
 	 * @return
 	 * Method 설명 : 전체 사용자 수 조회
 	 */
-	int getUserCnt(SqlSession sqlSession);
+	int getUserCnt();
 	
 	/**
 	 * Method : insertUser
@@ -47,7 +47,7 @@ public interface IUserDao {
 	 * @return
 	 * Method 설명 : 사용자 등록
 	 */
-	int insertUser(SqlSession sqlSession, UserVo userVo);
+	int insertUser(UserVo userVo);
 	
 	/**
 	 * Method : updateUser
@@ -58,7 +58,7 @@ public interface IUserDao {
 	 * @return
 	 * Method 설명 : 사용자 정보 수정
 	 */
-	int updateUser(SqlSession sqlSession, UserVo userVo);
+	int updateUser(UserVo userVo);
 	
 	/**
 	 * Method : updateUserPass
@@ -69,7 +69,7 @@ public interface IUserDao {
 	 * @return
 	 * Method 설명 : 사용자 비밀번호 암호화 작업
 	 */
-	int updateUserPass(SqlSession sqlSession, UserVo userVo);
+	int updateUserPass(UserVo userVo);
 	
 	/**
 	 * Method : deleteUser
@@ -79,5 +79,5 @@ public interface IUserDao {
 	 * @return
 	 * Method 설명 : 사용자 삭제
 	 */
-	int deleteUser(SqlSession sqlSession, String userId);
+	int deleteUser(String userId);
 }

@@ -21,27 +21,13 @@ public class UserDaoImplTest extends LogicTestConfig{
 	
 	@Resource(name="userDao")
 	private IUserDao dao;
-	private SqlSession sqlSession;
-	
-	@Before
-	public void setup(){
-		SqlSessionFactory sqlSessionFactory = MybatisSqlSessionFactory.getSqlSessionFactory();
-		sqlSession = sqlSessionFactory.openSession();
-	}
-	
-	@After
-	public void testDown(){
-		sqlSession.commit();
-		sqlSession.close();
-	}
-	
 	
 	@Test
 	public void testGetAllUser() {
 		/***Given***/
 		
 		/***When***/
-		List<UserVo> list = dao.getAllUser(sqlSession);
+		List<UserVo> list = dao.getAllUser();
 //		for(UserVo userVo : list){
 //			System.out.println(userVo);
 //		}
@@ -55,10 +41,9 @@ public class UserDaoImplTest extends LogicTestConfig{
 	@Test
 	public void testSelectUser() {
 		/***Given***/
-		IUserDao dao = new UserDaoImpl();
 		
 		/***When***/
-		UserVo vo = dao.selectUser(sqlSession, "cony");
+		UserVo vo = dao.selectUser("brown");
 		
 		/***Then***/
 		assertNotNull(vo);
@@ -70,7 +55,7 @@ public class UserDaoImplTest extends LogicTestConfig{
 		PageVo vo = new PageVo(1, 10);
 		
 		/***When***/
-		List<UserVo> list = dao.selectUserPagingList(sqlSession, vo);
+		List<UserVo> list = dao.selectUserPagingList(vo);
 		
 		/***Then***/
 		assertNotNull(list);
@@ -88,7 +73,7 @@ public class UserDaoImplTest extends LogicTestConfig{
 		/***Given***/
 		
 		/***When***/
-		int cnt = dao.getUserCnt(sqlSession);
+		int cnt = dao.getUserCnt();
 		
 		/***Then***/
 		assertNotNull(cnt);
@@ -144,7 +129,7 @@ public class UserDaoImplTest extends LogicTestConfig{
 		vo.setZipcode(zipcode);
 		vo.setPass(pass);
 		
-		int cnt = dao.insertUser(sqlSession, vo);
+		int cnt = dao.insertUser(vo);
 		
 		
 		/***Then***/
@@ -158,7 +143,7 @@ public class UserDaoImplTest extends LogicTestConfig{
 		String userId = "goo7451";
 		
 		/***When***/
-		int cnt = dao.deleteUser(sqlSession, userId);
+		int cnt = dao.deleteUser(userId);
 		
 		/***Then***/
 		assertEquals(cnt, 1);
@@ -169,7 +154,7 @@ public class UserDaoImplTest extends LogicTestConfig{
 		/***Given***/
 		String userId = "goo1234";
 		
-		UserVo vo = dao.selectUser(sqlSession, userId);
+		UserVo vo = dao.selectUser(userId);
 		
 		vo.setUserNm("qwe1");
 		vo.setAlias("qwe2");
@@ -179,7 +164,7 @@ public class UserDaoImplTest extends LogicTestConfig{
 		vo.setPass("qwe123");
 		
 		/***When***/
-		int updateCnt = dao.updateUser(sqlSession, vo);
+		int updateCnt = dao.updateUser(vo);
 		
 		
 		/***Then***/

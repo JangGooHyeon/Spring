@@ -34,13 +34,7 @@ public class UserServiceImpl implements IUserService {
 	 */
 	@Override
 	public List<UserVo> getAllUser() {
-		SqlSessionFactory sqlSessionFactory = MybatisSqlSessionFactory.getSqlSessionFactory();
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		List<UserVo> userList = dao.getAllUser(sqlSession);
-		
-		sqlSession.close();
-		
-		return userList;
+		return dao.getAllUser();
 	}
 
 	/**
@@ -53,13 +47,7 @@ public class UserServiceImpl implements IUserService {
 	 */
 	@Override
 	public UserVo selectUser(String userId) {
-		SqlSessionFactory sqlSessionFactory = MybatisSqlSessionFactory.getSqlSessionFactory();
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		UserVo userVo = dao.selectUser(sqlSession, userId);
-		
-		sqlSession.close();
-		
-		return userVo;
+		return dao.selectUser(userId);
 	}
 
 	/**
@@ -72,15 +60,10 @@ public class UserServiceImpl implements IUserService {
 	 */
 	@Override
 	public Map<String, Object> selectUserPagingList(PageVo pageVo) {
-		SqlSessionFactory sqlSessionFactory = MybatisSqlSessionFactory.getSqlSessionFactory();
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
-		resultMap.put("userList", dao.selectUserPagingList(sqlSession, pageVo));
-		resultMap.put("userCnt", dao.getUserCnt(sqlSession));
-		
-		sqlSession.close();
+		resultMap.put("userList", dao.selectUserPagingList(pageVo));
+		resultMap.put("userCnt", dao.getUserCnt());
 		
 		return resultMap;
 	}
@@ -95,15 +78,7 @@ public class UserServiceImpl implements IUserService {
 	 */
 	@Override
 	public int insertUser(UserVo userVo) {
-		SqlSessionFactory sqlSessionFactory = MybatisSqlSessionFactory.getSqlSessionFactory();
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		
-		int cnt = dao.insertUser(sqlSession, userVo);
-		
-		sqlSession.commit();
-		sqlSession.close();
-		
-		return cnt;
+		return dao.insertUser(userVo);
 	}
 	
 	/**
@@ -116,15 +91,7 @@ public class UserServiceImpl implements IUserService {
 	 */
 	@Override
 	public int updateUser(UserVo userVo) {
-		SqlSessionFactory sqlSessionFactory = MybatisSqlSessionFactory.getSqlSessionFactory();
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		
-		int cnt = dao.updateUser(sqlSession, userVo);
-		
-		sqlSession.commit();
-		sqlSession.close();
-		
-		return cnt;
+		return dao.updateUser(userVo);
 	}
 
 	/**
@@ -137,15 +104,7 @@ public class UserServiceImpl implements IUserService {
 	 */
 	@Override
 	public int updateUserPass(UserVo userVo) {
-		SqlSessionFactory sqlSessionFactory = MybatisSqlSessionFactory.getSqlSessionFactory();
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		
-		int cnt = dao.updateUserPass(sqlSession, userVo);
-		
-		sqlSession.commit();
-		sqlSession.close();
-		
-		return cnt;
+		return  dao.updateUserPass(userVo);
 	}
 	
 	/**
@@ -158,15 +117,7 @@ public class UserServiceImpl implements IUserService {
 	 */
 	@Override
 	public int deleteUser(String userId) {
-		SqlSessionFactory sqlSessionFactory = MybatisSqlSessionFactory.getSqlSessionFactory();
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		
-		int cnt = dao.deleteUser(sqlSession, userId);
-		
-		sqlSession.commit();
-		sqlSession.close();
-		
-		return cnt;
+		return dao.deleteUser(userId);
 	}
 
 

@@ -107,7 +107,6 @@ public class UserServiceImplTest extends LogicTestConfig {
 		/***When***/
 		
 		int cnt = userService.insertUser(userVo);
-		System.out.println(cnt);
 		
 		/***Then***/
 		assertEquals(cnt, 1);
@@ -149,7 +148,7 @@ public class UserServiceImplTest extends LogicTestConfig {
 
 	}
 	
-	@Test
+//	@Test
 	public void testUpdateUserPass(){
 		/***Given***/
 		List<UserVo> list = userService.getAllUser();
