@@ -21,13 +21,7 @@ public class ProdServiceImpl implements IProdService {
 	
 	@Override
 	public List<ProdVo> selectLprod(String prod_lgu) {
-		SqlSessionFactory sqlSessionFactory = MybatisSqlSessionFactory.getSqlSessionFactory();
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		
-		List<ProdVo> list = dao.selectLprod(sqlSession, prod_lgu);
-		
-		sqlSession.close();
-		
+		List<ProdVo> list = dao.selectLprod(prod_lgu);
 		return list;
 	}
 

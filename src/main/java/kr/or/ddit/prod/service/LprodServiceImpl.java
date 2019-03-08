@@ -26,27 +26,16 @@ public class LprodServiceImpl implements ILprodService {
 	
 	@Override
 	public List<LprodVo> getAllLprod() {
-		SqlSessionFactory sqlSessionFactory = MybatisSqlSessionFactory.getSqlSessionFactory();
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		
-		List<LprodVo> list = dao.getAllLprod(sqlSession);
-		
-		sqlSession.close();
-		
+		List<LprodVo> list = dao.getAllLprod();
 		return list;
 	}
 
 	@Override
 	public Map<String, Object> selectLprodPagingList(PageVo pageVo) {
-		SqlSessionFactory sqlSessionFactory = MybatisSqlSessionFactory.getSqlSessionFactory();
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
-		resultMap.put("lprodList", dao.selectLprodPagingList(sqlSession, pageVo));
-		resultMap.put("lprodCnt", dao.getLprodCnt(sqlSession));
-		
-		sqlSession.close();
+		resultMap.put("lprodList", dao.selectLprodPagingList(pageVo));
+		resultMap.put("lprodCnt", dao.getLprodCnt());
 		
 		return resultMap;
 	}

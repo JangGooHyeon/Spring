@@ -8,9 +8,9 @@ import kr.or.ddit.prod.model.LprodVo;
 import kr.or.ddit.util.model.PageVo;
 
 public interface ILprodDao {
-	List<LprodVo> getAllLprod(SqlSession sqlSession);
+	List<LprodVo> getAllLprod();
 	
-	List<LprodVo> selectLprodPagingList(SqlSession sqlSession, PageVo pageVo);
+	List<LprodVo> selectLprodPagingList(PageVo pageVo);
 	
-	int getLprodCnt(SqlSession sqlSession);
+	int getLprodCnt();
 }
