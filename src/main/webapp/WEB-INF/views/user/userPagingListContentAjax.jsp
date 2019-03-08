@@ -116,6 +116,30 @@
 				
 				$("#userListTbody").html(htmlArr[0]);
 				$("#pagination").html(htmlArr[1]);
+				
+				
+				//1. html이 ajax호출에 의해 정상적으로 생성된 이후 클릭 이벤트 핸들러를 등록(success -> 사용자 html이 생성된 이후에 등록)
+// 				$(".userTr").on("click", function(){
+// 		   			console.log("userTr click");
+// 		   			var userId = $(this).data("userid");
+		   			
+// 		   			$("#userId").val(userId);
+// 		   			$("#frm").submit();
+					
+// 		   		});
+				
+				//2. 이벤트를 tr에 등록하는 것이 아니라 tbody에 등록 -> 이벤트 핸들러 대상을 변경(ajax를 사용할 때 실무에서 많이 쓰이는 형태)
+				//동적으로 생성되는 html을 감싸는 영역에 이벤트를 등록. 단, on옵션에서 감싸는 영역 안에 처리되어야 할 selector를 명시
+				//$(".userTr").on("click", function(){...}); -> on("click", "userTr",function(){...});
+				$("#userListTbody").on("click", ".userTr", function(){
+		   			console.log("userTr");
+		   			var userId = $(this).data("userid");
+		   			
+		   			$("#userId").val(userId);
+		   			$("#frm").submit();
+					
+		   		});
+				
 			}
 		})
 	}
@@ -126,14 +150,7 @@
 //    		getUserPageList(1, 10);
 		getUserPageListHtml(1);
    		
-   		$(".userTr").on("click", function(){
-   			console.log("userTr click");
-   			var userId = $(this).data("userid");
-   			
-   			$("#userId").val(userId);
-   			$("#frm").submit();
-			
-   		});
+   		
    	});
 </script>
     
