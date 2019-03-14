@@ -65,7 +65,16 @@
 		<property name="maxUploadSizePerFile" value="5242880"/>
 	</bean>
 	
-	
-
-
+	<!-- bean 이름 localeResolver로 정해져 있다 -->
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
+		<!-- localeCahngerInterceptor -->
+		<mvc:interceptors>
+			<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+				<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+					<property name="paramName" value="language"></property>
+				</bean>
+			</mvc:interceptor>
+		</mvc:interceptors>
+		
 </beans>
